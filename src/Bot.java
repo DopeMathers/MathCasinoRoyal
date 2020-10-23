@@ -33,8 +33,8 @@ public class Bot extends Player
 	@Override
 	public int getGuess()
 	{
-		setGuess();
-		return super.guess;
+		System.out.println("use getGuess(int solution)");
+		return 0;
 	}
 
 	@Override
@@ -54,15 +54,15 @@ public class Bot extends Player
 	@Override
 	public void setGuess() 
 	{
-		System.err.println(lang.getString("error2"));
+		System.err.println(lang.getString("Not in use here!"));
 	}
 	
-	public void setGuess(int solution)
+	public int getGuess(int solution)
 	{
 		int cach;
 		cach = ran.nextInt(100)-1;
 		
-		if(cach%2 == 0)
+		if(cach%2 != 0)
 		{
 			super.guess = solution;
 		}
@@ -70,7 +70,7 @@ public class Bot extends Player
 		{
 			super.guess = solution - ran.nextInt(155); //Random abziehen damit ergebnis falsch ergibt
 		}
-		
+		return super.guess;
 	}
 	
 }
