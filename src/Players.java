@@ -1,8 +1,12 @@
 import java.util.InputMismatchException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class Players extends Player
 {
+	Locale locale = new Locale(Game.lang,Game.region);
+	ResourceBundle lang = ResourceBundle.getBundle("LanguageBundle", locale);
 	
 	@Override
 	public int getLifes() 
@@ -36,6 +40,7 @@ public class Players extends Player
 		super.name = name;
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public void setGuess() 
 	{
@@ -51,7 +56,7 @@ public class Players extends Player
 		}
 		catch(InputMismatchException e)
 		{
-			System.err.println("NaN, try again! Only Numbers!");
+			System.err.println(lang.getString("error1"));
 			check = false;
 		}
 		
