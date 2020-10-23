@@ -14,10 +14,10 @@ We planned to reprogramming the game and combine it with javaFX. Learn more abou
 * [1] Fenster icon 
 
 * [2] Scene 0: 4 Reihen:
-**	Reihe 1: Menüleiste: Programm (Sprache, Schließen)
-**	Reihe 2: Spiellogo 
-**	Reihe 3: Welchen Modus möchtest du spielen 
-**	Reihe 4: 2 Spalten: Button PlayerVsPlayer | Button PlayerVsBot
+*	Reihe 1: Menüleiste: Programm (Sprache, Schließen)
+*	Reihe 2: Spiellogo 
+*	Reihe 3: Welchen Modus möchtest du spielen 
+*	Reihe 4: 2 Spalten: Button PlayerVsPlayer | Button PlayerVsBot
 * [3] Scene 1.1: 4 Reihen:
 **	Reihe 1: Menüleiste: Programm (Sprache, Schließen)
 **	Reihe 2: Spiellogo
