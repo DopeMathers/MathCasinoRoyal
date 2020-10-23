@@ -1,8 +1,17 @@
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class Game 
 {
-
+	public static String language = "german";
+	public static String region = "US";
+	public static String lang = "en";
+	
+	private static Locale locale = new Locale(lang,region);
+	private static ResourceBundle rba = ResourceBundle.getBundle("LanguageBundle", locale);
+	private static ResourceBundle rbb;
+	
 	private static int round = 1;
 	
 	private static Players playerOne = new Players();
@@ -15,26 +24,46 @@ public class Game
 	public static void main(String[] args) 
 	{
 
+		System.out.println(rba.getString("askForLanguage"));
 		
+		language = scan.nextLine();
 		
-		System.out.println("Player 1 wie ist dein Name?");
+		if(language.equalsIgnoreCase("deutsch")|| language.equalsIgnoreCase("german") || language.equalsIgnoreCase("de") || language.equalsIgnoreCase("ger"))
+			{
+			language = "deutsch";
+			lang = "de";
+			region = "DE";
+			}
+		else
+		{
+			language = "english";
+			lang = "en";
+			region = "US";
+		}
+	
+		locale = new Locale(lang,region);
+		rbb = ResourceBundle.getBundle("LanguageBundle", locale);
+		
+		System.out.println(rbb.getString("languageSetTo"));
+		
+		System.out.println(rbb.getString("askP1ForName"));
 		playerOne.setName(scan.nextLine());
 		
-		System.out.println("Player 2 wie ist dein Name?");
+		System.out.println(rbb.getString("askP2ForName"));
 		playerTwo.setName(scan.nextLine());
 		
 		while(playerOne.getLifes() > 0 && playerTwo.getLifes() > 0)
 		{
 			
 			int guess;
-			System.out.println("Runde: " + round);
+			System.out.println(rbb.getString("round") + " " + round);
 			calcPosition();
 			trans = mathe.getAufgabe();
 			
-			if(trans.getOperator() == '+')System.out.println("Was ist " + trans.getAufgabe1() + Character.toString(trans.getOperator()) + trans.getAufgabe2() + " ?");
-			if(trans.getOperator() == '-')System.out.println("Was ist " + trans.getAufgabe1() + Character.toString(trans.getOperator()) + trans.getAufgabe2() + " ?");
-			if(trans.getOperator() == '*')System.out.println("Was ist " + trans.getAufgabe1() + Character.toString(trans.getOperator()) + trans.getAufgabe2() + " ?");
-			if(trans.getOperator() == '/')System.out.println("Was ist " + trans.getAufgabe1() + Character.toString(trans.getOperator()) + trans.getAufgabe2() + " ?");
+			if(trans.getOperator() == '+')System.out.println(rbb.getString("question") + " " + trans.getAufgabe1() + Character.toString(trans.getOperator()) + trans.getAufgabe2() + " ?");
+			if(trans.getOperator() == '-')System.out.println(rbb.getString("question") + " " + trans.getAufgabe1() + Character.toString(trans.getOperator()) + trans.getAufgabe2() + " ?");
+			if(trans.getOperator() == '*')System.out.println(rbb.getString("question") + " " + trans.getAufgabe1() + Character.toString(trans.getOperator()) + trans.getAufgabe2() + " ?");
+			if(trans.getOperator() == '/')System.out.println(rbb.getString("question") + " " + trans.getAufgabe1() + Character.toString(trans.getOperator()) + trans.getAufgabe2() + " ?");
 							
 			
 			if(round % 2 != 0)
@@ -42,12 +71,12 @@ public class Game
 				guess = playerOne.getGuess();
 				if(guess != trans.getSolution())
 				{
-					System.err.println("FALSCH");
+					System.err.println(rbb.getString("wrong"));
 					playerOne.looseLifes();						
 				} 
 				else
 				{
-					System.out.println("Korrekt");
+					System.out.println(rbb.getString("right"));
 				}
 			}
 			else
@@ -55,12 +84,12 @@ public class Game
 				guess = playerTwo.getGuess();
 				if(guess != trans.getSolution())
 				{
-					System.err.println("FALSCH");
+					System.err.println(rbb.getString("wrong"));
 					playerTwo.looseLifes();						
 				} 
 				else
 				{
-					System.out.println("Korrekt");
+					System.out.println(rbb.getString("right"));
 				}
 			}
 			
@@ -68,11 +97,11 @@ public class Game
 		
 			if(playerOne.getLifes() > 0)
 			{
-				System.out.println("Spieler gewinnt");
+				System.out.println(rbb.getString("winP1"));
 			}
 			else if(playerTwo.getLifes() > 0)
 			{
-				System.out.println("Cpu gewinnt");
+				System.out.println(rbb.getString("winP2"));
 			}
 			
 		}//WHILE
@@ -85,43 +114,43 @@ public class Game
 		
 		if(round % 2 != 0)
 		{
-		System.out.println(playerOne.getName() + " du bist an der Reihe!");
-		System.out.println(playerOne.getLifes() + " leben übrig");
+		System.out.println(playerOne.getName() + " " + rbb.getString("yourTurn"));
+		System.out.println(playerOne.getLifes() + " " + rbb.getString("lifesOver"));
 		
 		position = playerOne.getLifes() - playerTwo.getLifes();
 		
 		if(position == 0)
 		{
-			System.out.println("Gleichstand");
+			System.out.println(rbb.getString("draw"));
 		}
 		else if(position > 0)
 		{
-			System.out.println(position + " leben vorsprung");
+			System.out.println(position + " " + rbb.getString("lifesAhead"));
 		}
 		else
 		{
 			position *= -1;
-			System.out.println("Gegenspieler hat " + position + " leben mehr");
+			System.out.println(rbb.getString("enemyHad") + " " + position + " " + rbb.getString("enemyHad2"));
 		}
 		}
 		else
 		{
-			System.out.println(playerTwo.getName() + " du bist an der Reihe!");
-			System.out.println(playerTwo.getLifes() + " leben übrig");
+			System.out.println(playerTwo.getName() + " " + rbb.getString("yourTurn"));
+			System.out.println(playerTwo.getLifes() + " " + rbb.getString("lifesOver"));
 			
 			position = playerTwo.getLifes() - playerOne.getLifes();
 			if(position == 0)
 			{
-				System.out.println("Gleichstand");
+				System.out.println(rbb.getString("draw"));
 			}
 			else if(position > 0)
 			{
-				System.out.println(position + " leben vorsprung");
+				System.out.println(position + " " + rbb.getString("lifesAhead"));
 			}
 			else
 			{
 				position *= -1;
-				System.out.println("Gegenspieler hat " + position + " leben mehr");
+				System.out.println(rbb.getString("enemyHad") + " " + position + " " + rbb.getString("enemyHad2"));
 			}
 		}
 	}

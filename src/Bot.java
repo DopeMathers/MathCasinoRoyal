@@ -1,9 +1,14 @@
+import java.util.Locale;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 public class Bot extends Player
 {
 
-	private String[] name = {"Botplayer","Botmen","Botchick","Boterino"};
+	Locale locale = new Locale(Game.lang,Game.region);
+	ResourceBundle lang = ResourceBundle.getBundle("LanguageBundle", locale);
+	
+	private String[] name = {lang.getString("botname1"),lang.getString("botname2"),lang.getString("botname3"),lang.getString("botname4")};
 	Random ran = new Random();
 	
 	public Bot()
@@ -49,7 +54,7 @@ public class Bot extends Player
 	@Override
 	public void setGuess() 
 	{
-		System.out.println("Please use 'setGuess(int solution)' for bot!");
+		System.err.println(lang.getString("error2"));
 	}
 	
 	public void setGuess(int solution)
